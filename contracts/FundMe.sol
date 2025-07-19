@@ -15,6 +15,10 @@ error FundMe__NotOwner();
  */
 contract FundMe {
     // Type Declarations
+    // let uint256 be our type for USD
+    // using PriceConverter for uint256 allows us to call getConversionRate on uint256 directly
+    // This means we can call `msg.value.getConversionRate(s_priceFeed)` instead of
+    // `PriceConverter.getConversionRate(msg.value, s_priceFeed)`
     using PriceConverter for uint256;
 
     // State variables
@@ -43,6 +47,7 @@ contract FundMe {
     //// private
     //// view / pure
 
+    //adress priceFeed is the address of the Chainlink price feed contract
     constructor(address priceFeed) {
         s_priceFeed = AggregatorV3Interface(priceFeed);
         i_owner = msg.sender;
