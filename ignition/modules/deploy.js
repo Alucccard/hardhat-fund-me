@@ -11,7 +11,8 @@ const { networkconfig } = require("../../helper-hardhat-config");
 
 module.exports = buildModule("priceConverterModule", (m) => {
   //const { ethers, ethers2 } = m;
-
+  // Get the network configuration
+  const chainId = m.getChainId();
   // Define the deployment script for the PriceConverter contract
   const priceConverter = m.contract("PriceConverter");
 

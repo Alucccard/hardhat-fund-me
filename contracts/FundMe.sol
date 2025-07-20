@@ -48,6 +48,7 @@ contract FundMe {
     //// view / pure
 
     //adress priceFeed is the address of the Chainlink price feed contract
+    //defined pricefeed in the constructor, so your chain is defined by the address you pass in
     constructor(address priceFeed) {
         s_priceFeed = AggregatorV3Interface(priceFeed);
         i_owner = msg.sender;
