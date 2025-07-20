@@ -9,7 +9,15 @@ const networkconfig = {
   },
 };
 
+//to determine if the network is a development chain
+const developmentChains = ["hardhat", "localhost"];
+const DECIMALS = 8;
+const INITIAL_ANSWER = 200000000000;
+
 module.exports = {
   networkconfig,
+  developmentChains,
+  DECIMALS,
+  INITIAL_ANSWER,
 };
 // This setup uses Hardhat Ignition to manage smart contract deployments.

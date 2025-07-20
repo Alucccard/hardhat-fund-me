@@ -4,19 +4,19 @@
 
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
 const { networkconfig } = require("../../helper-hardhat-config");
-
-// const ethUsdPriceFeedAddress = networkconfig[chainId].ethUsdPriceFeed;
+const { network } = require("hardhat");
 
 // if the contract does not exist, we will use a mock on local networks
 
-module.exports = buildModule("priceConverterModule", (m) => {
-  //const { ethers, ethers2 } = m;
-  // Get the network configuration
-  const chainId = m.getChainId();
+module.exports = buildModule("FundeMeModule", (m) => {
+  const chainId = network.config.chainId;
+  //how to get the chainId in ignition?
+  const ethUsdPriceFeedAddress = networkconfig[chainId].ethUsdPriceFeed;
   // Define the deployment script for the PriceConverter contract
-  const priceConverter = m.contract("PriceConverter");
+  const fundMe = m.contract("FundMe", [ethUsdPriceFeedAddress]);
+  // Specify the contract name and its constructor arguments);
 
-  return { priceConverter };
+  return { fundMe };
 });
 
 //use a mock for the PriceConverter contract when testing
