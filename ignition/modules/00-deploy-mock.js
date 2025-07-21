@@ -6,18 +6,17 @@ const {
   DECIMALS,
   INITIAL_ANSWER,
 } = require("../../helper-hardhat-config");
+const { log } = require("console");
 
 module.exports = buildModule("FundeMeModule", (m) => {
-  const chainId = network.config.chainId;
+  const chainName = network.name;
 
-  if (developmentChains.includes(chainId)) {
-    console.log("Local network detected! Deploying mocks...");
+  if (developmentChains.includes(chainName)) {
+    const mock = m.contract("MockV3Aggregator", [DECIMALS, INITIAL_ANSWER]);
+    // Specify the contract name and its constructor arguments);
+    return { mock };
   }
-  const mock = m.contract("MockV3Aggregator", [DECIMALS, INITIAL_ANSWER]);
-  // Specify the contract name and its constructor arguments);
-
-  return { mock };
 });
 
 //use a mock for the PriceConverter contract when testing
-module.exports.tags = ["all", "mocks"];
+// module.exports.tags = ["all", "mocks"];
